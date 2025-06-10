@@ -1,0 +1,18 @@
+version: '3.8' # Versão da especificação do Docker Compose
+
+services:
+  web: # Nome do seu serviço (você pode chamar de "api", "app", etc.)
+    build: . # O Docker Compose vai procurar um Dockerfile no diretório atual para construir a imagem
+    ports:
+      - "8000:8000" # Mapeia a porta 8000 do host para a porta 8000 do contêiner
+    volumes:
+      # Mapeia o diretório 'data' do seu host para o diretório '/app/data' dentro do contêiner.
+      # Isso garante que o arquivo sql_app.db (que estará em /app/data) seja persistente.
+      # Se a pasta 'data' não existir no seu host, o Docker a criará.
+      - ./data:/app/data
+    # Removendo a seção environment se não for usada, ou ajustando a sintaxe se for.
+    # Se quiser definir variáveis de ambiente, descomente e use o formato chave: valor
+    # environment:
+    #   DATABASE_URL: "sqlite:///./data/sql_app.db"
+    #   OUTRA_VAR: "qualquer_valor"
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

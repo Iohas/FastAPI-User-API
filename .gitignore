@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/  # Ignora o diretório do ambiente virtual
+.ipynb_checkpoints
+.pytest_cache/
+
+# Docker
+*.env
+.dockerignore
+docker-compose.override.yml # Se você usar um arquivo de override para dev local
+*.log
+.docker/*
+
+# Dados (gerados localmente)
+data/  # Ignora a pasta 'data' que contém o banco de dados SQLite local
+       # IMPORTANTE: Se você pretende que o DB seja versionado (raro para SQLite em dev), remova esta linha.
+       # Para produção, você normalmente não versionaria o DB em si, apenas o esquema ou seeds.
+
+# Editores e IDEs
+.vscode/ # Para VS Code
+.idea/   # Para PyCharm
+*.sublime-project
+*.sublime-workspace
+
+# Sistema Operacional
+.DS_Store # macOS
+Thumbs.db # Windows
