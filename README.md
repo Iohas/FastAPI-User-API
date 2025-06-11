@@ -26,8 +26,8 @@ Certifique-se de ter o Docker Desktop (que inclui o Docker Engine e o Docker Com
 1. Clone o Repositório
 Clone o projeto para sua máquina e navegue até o diretório raiz:
 
-git clone https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git
-cd SEU_REPOSITORIO
+git clone https://github.com/Iohas/FastAPI-User-API.git
+cd FastAPI-User-API
 
 2. Inicie a Aplicação com Docker Compose
 Dentro do diretório raiz do projeto (onde o arquivo docker-compose.yml está localizado), execute o seguinte comando no terminal:
