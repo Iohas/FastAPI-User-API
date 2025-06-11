@@ -7,6 +7,10 @@ from sqlalchemy.orm import sessionmaker
 # Importa a instância 'app', 'Base', 'User' e 'get_db' do seu main.py
 from main import app, Base, User, get_db
 
+# --- IMPORTAÇÃO CORRIGIDA ---
+from datetime import date, datetime # <--- Adicione datetime aqui
+# ---------------------------
+
 # --- Configuração do Banco de Dados de Teste ---
 # Para testes, usaremos um banco de dados SQLite em memória
 # Isso garante que cada execução de teste comece com um DB limpo e não altere o DB real.
@@ -64,7 +68,12 @@ def test_create_user(client):
     # Verifica se os dados retornados estão corretos
     assert response.json()["name"] == user_data["name"]
     assert response.json()["city"] == user_data["city"]
-    assert response.json()["age"] == datetime.now().year - 1990 # Verifica idade calculada
+    
+    # --- Verificação de idade ajustada ---
+    expected_age = datetime.now().year - int(user_data["birthday"].split('-')[0])
+    assert response.json()["age"] == expected_age
+    # -----------------------------------
+    
     assert "id" in response.json() # Verifica se um ID foi gerado
 
 def test_get_existing_user(client):
@@ -88,7 +97,11 @@ def test_get_existing_user(client):
     assert response.json()["id"] == user_id
     assert response.json()["name"] == user_data["name"]
     assert response.json()["city"] == user_data["city"]
-    assert response.json()["age"] == datetime.now().year - 1985
+    
+    # --- Verificação de idade ajustada ---
+    expected_age = datetime.now().year - int(user_data["birthday"].split('-')[0])
+    assert response.json()["age"] == expected_age
+    # -----------------------------------
 
 def test_get_non_existent_user(client):
     # Tenta consultar um ID que certamente não existe
